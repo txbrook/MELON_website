@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MELON: Multimodal Spatial Attention</title>
+    <meta name="description"
+        content="MELON: Integrating multimodal data with learnable spatial attention and contrastive learning for biological insights.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Ported Background Elements -->
+    <div class="background-container">
+        <!-- Dot Pattern -->
+        <svg class="dot-pattern" width="100%" height="100%">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1.5" fill="#F0A8D0" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots)" />
+        </svg>
+
+        <!-- Connection Lines -->
+        <svg class="connection-lines" width="100%" height="100%">
+            <line x1="15%" y1="25%" x2="45%" y2="55%" class="conn-line delay-0" />
+            <line x1="65%" y1="20%" x2="85%" y2="65%" class="conn-line delay-3" />
+            <line x1="25%" y1="75%" x2="60%" y2="35%" class="conn-line delay-5" />
+            <line x1="75%" y1="30%" x2="40%" y2="80%" class="conn-line delay-2" />
+        </svg>
+
+        <!-- Floating Shapes -->
+        <!-- Large -->
+        <div class="floating-shape shape-circle large delay-0"
+            style="left: 8%; top: 12%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 320px; height: 320px; --move-x: 100px; --move-y: -80px;">
+        </div>
+        <div class="floating-shape shape-rounded large delay-3-5"
+            style="left: 68%; top: 18%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 280px; height: 280px; --move-x: -120px; --move-y: 100px;">
+        </div>
+        <div class="floating-shape shape-circle large delay-6"
+            style="left: 82%; top: 58%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 240px; height: 240px; --move-x: 90px; --move-y: 130px;">
+        </div>
+        <div class="floating-shape shape-rounded large delay-2"
+            style="left: 18%; top: 68%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 300px; height: 300px; --move-x: -70px; --move-y: -100px;">
+        </div>
+
+        <!-- Medium -->
+        <div class="floating-shape shape-circle medium delay-1-5"
+            style="left: 42%; top: 28%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 200px; height: 200px; --move-x: 70px; --move-y: -70px;">
+        </div>
+        <div class="floating-shape shape-rounded medium delay-5"
+            style="left: 58%; top: 72%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 180px; height: 180px; --move-x: -90px; --move-y: 80px;">
+        </div>
+        <div class="floating-shape shape-square medium delay-4"
+            style="left: 88%; top: 42%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 220px; height: 220px; --move-x: 60px; --move-y: -60px;">
+        </div>
+
+        <!-- Small -->
+        <div class="floating-shape shape-circle small delay-2-5"
+            style="left: 28%; top: 48%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 140px; height: 140px; --move-x: 50px; --move-y: 55px;">
+        </div>
+        <div class="floating-shape shape-rounded small delay-7"
+            style="left: 72%; top: 38%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 160px; height: 160px; --move-x: -60px; --move-y: -45px;">
+        </div>
+        <div class="floating-shape shape-circle small delay-4-5"
+            style="left: 92%; top: 82%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 120px; height: 120px; --move-x: 75px; --move-y: 95px;">
+        </div>
+
+        <!-- Tiny -->
+        <div class="floating-shape shape-circle tiny delay-1"
+            style="left: 48%; top: 52%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 80px; height: 80px; --move-x: 35px; --move-y: 45px;">
+        </div>
+        <div class="floating-shape shape-circle tiny delay-6-5"
+            style="left: 62%; top: 48%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 90px; height: 90px; --move-x: -45px; --move-y: -35px;">
+        </div>
+        <div class="floating-shape shape-circle tiny delay-3"
+            style="left: 22%; top: 62%; background: linear-gradient(135deg, #E879B9 0%, #D45D9F 100%); width: 100px; height: 100px; --move-x: 40px; --move-y: 50px;">
+        </div>
+        <div class="floating-shape shape-rounded tiny delay-5-5"
+            style="left: 38%; top: 88%; background: linear-gradient(135deg, #F0A8D0 0%, #E879B9 100%); width: 110px; height: 110px; --move-x: -50px; --move-y: -55px;">
+        </div>
+
+        <!-- Pulsing Glow -->
+        <div class="pulsing-glow"></div>
+    </div>
+
+    <!-- Navbar removed as requested -->
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="animate-up">MELON 🚀</h1>
+            <p class="subtitle animate-up delay-1">
+                Integrate Multimodal Data with Learnable Spatial Attention and Contrastive Learning
+            </p>
+            <div class="cta-buttons animate-up delay-2">
+                <a href="#" class="btn primary"><i class="far fa-file-pdf"></i> Read the Paper</a>
+                <a href="https://github.com/your-username/MELON" class="btn secondary"><i class="fab fa-github"></i>
+                    View Code</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Overview</h2>
+                <div class="card fade-in">
+                    <img src="diaggraph.png" alt="MELON Overview Diagram" class="overview-diagram">
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Methodologies section removed -->
+
+        <section id="citation" class="section">
+            <div class="container">
+                <h2 class="section-title">Citation</h2>
+                <div class="citation-box fade-in">
+                    <pre><code>@article{MELON2026,
+  title={MELON: Integrating Multimodal with Learnable Spatial Attention and Contrastive Learning},
+  author={Author Name and Co-Author Name},
+  journal={Journal Name},
+  year={2026},
+  url={https://link-to-paper.com}
+}</code></pre>
+                    <button class="copy-btn" onclick="copyCitation()"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 MELON Project. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
