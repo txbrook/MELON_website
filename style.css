@@ -129,16 +129,14 @@ body {
 }
 
 .hero-content .subtitle {
-    /* Headline Small - Modified */
+    /* Headline Small - MD3 Standard */
     font-family: var(--md-sys-typescale-headline-small-font);
-    font-size: 32px;
-    /* Increased from 24px */
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 32px;
     font-weight: var(--md-sys-typescale-headline-small-weight);
     color: #000000;
     margin: 0 auto 3rem;
-    max-width: 900px;
-    /* Increased width for larger text */
+    max-width: 800px;
 }
 
 .highlight {
