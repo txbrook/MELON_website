@@ -52,22 +52,106 @@ function copyCitation() {
     });
 }
 
-// Parallax Effect
+// --- Interactive Dots Canvas ---
+const canvas = document.getElementById('dotCanvas');
+const ctx = canvas.getContext('2d');
+let dots = [];
+const dotCount = 150;
+const mouse = { x: null, y: null, radius: 150 };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initDots();
+}
+
+class Dot {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.baseX = x;
+        this.baseY = y;
+        this.size = 1.5;
+        this.density = (Math.random() * 30) + 1;
+    }
+
+    draw() {
+        ctx.fillStyle = '#F0A8D0';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    update() {
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
+
+        if (distance < mouse.radius) {
+            this.x -= directionX;
+            this.y -= directionY;
+        } else {
+            if (this.x !== this.baseX) {
+                let dx = this.x - this.baseX;
+                this.x -= dx / 10;
+            }
+            if (this.y !== this.baseY) {
+                let dy = this.y - this.baseY;
+                this.y -= dy / 10;
+            }
+        }
+    }
+}
+
+function initDots() {
+    dots = [];
+    const spacing = 30;
+    const padding = 15;
+    for (let y = padding; y < canvas.height; y += spacing) {
+        for (let x = padding; x < canvas.width; x += spacing) {
+            dots.push(new Dot(x, y));
+        }
+    }
+}
+
+function animateDots() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].draw();
+        dots[i].update();
+    }
+    requestAnimationFrame(animateDots);
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+animateDots();
+
+// Parallax Effect & Mouse Interactivity
 document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+
     const mouseX = (e.clientX / window.innerWidth) - 0.5;
     const mouseY = (e.clientY / window.innerHeight) - 0.5;
 
-    // Move background opposite to mouse
-    const bgContainer = document.querySelector('.background-container');
-    if (bgContainer) {
-        bgContainer.style.transform = `translate(${mouseX * -20}px, ${mouseY * -20}px)`;
-    }
-
-    // Move content slightly with mouse for depth
+    // Movement for content slightly with mouse for depth (optional, keeping for polish)
     const content = document.querySelector('.hero-content');
     if (content) {
         content.style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
     }
+});
+
+document.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
 });
 
 // Scroll Background Effect - Progressive Fade (Starts at Overview)

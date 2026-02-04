@@ -19,14 +19,7 @@
     <!-- Ported Background Elements -->
     <div class="background-container">
         <!-- Dot Pattern -->
-        <svg class="dot-pattern" width="100%" height="100%">
-            <defs>
-                <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1.5" fill="#F0A8D0" />
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-        </svg>
+        <canvas id="dotCanvas"></canvas>
 
         <!-- Connection Lines -->
         <svg class="connection-lines" width="100%" height="100%">
