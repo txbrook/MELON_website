@@ -1,0 +1,63 @@
+{% set lang = 'en' %}
+{% if pagename.startswith('zh/') %}
+  {% set lang = 'zh' %}
+{% elif pagename.startswith('ja/') %}
+  {% set lang = 'ja' %}
+{% endif %}
+
+{% set prefix = '' if lang == 'en' else lang ~ '/' %}
+{% set home_doc = prefix ~ 'index' %}
+{% set light_logo = 'melon_logo.svg' %}
+{% set dark_logo = 'melon_logo_dark.svg' %}
+{% if lang == 'zh' %}
+  {% set light_logo = 'melon_logo_zh.svg' %}
+  {% set dark_logo = 'melon_logo_zh_dark.svg' %}
+{% elif lang == 'ja' %}
+  {% set light_logo = 'melon_logo_ja.svg' %}
+  {% set dark_logo = 'melon_logo_ja_dark.svg' %}
+{% endif %}
+
+<div class="melon-sidebar-logo">
+  <a href="{{ pathto(home_doc) }}">
+    <img class="melon-logo-light" src="{{ pathto('_static/' ~ light_logo, 1) }}" alt="MELON" />
+    <img class="melon-logo-dark"  src="{{ pathto('_static/' ~ dark_logo, 1) }}" alt="MELON" />
+  </a>
+</div>
+
+{% set nav_items = [
+  (
+    'tutorials/quickstart',
+    {'en': 'Quick Start', 'zh': '快速开始', 'ja': 'クイックスタート'}
+  ),
+  (
+    'tutorials/example_mouse_e15',
+    {
+      'en': 'Example: Mouse E15.5 Brain (RNA + ATAC)',
+      'zh': '示例：小鼠 E15.5 大脑 (RNA + ATAC)',
+      'ja': '例: マウス E15.5 脳 (RNA + ATAC)'
+    }
+  ),
+  (
+    'tutorials/data_preparation',
+    {'en': 'Data Preparation', 'zh': '数据准备', 'ja': 'データ準備'}
+  ),
+  (
+    'tutorials/training',
+    {'en': 'Training Configuration', 'zh': '训练配置', 'ja': '学習設定'}
+  ),
+  (
+    'tutorials/advanced',
+    {'en': 'Advanced Topics', 'zh': '高级主题', 'ja': '上級トピック'}
+  )
+] %}
+
+<ul{% if pagename == home_doc or pagename == prefix ~ 'tutorials/quickstart' %} class="current"{% endif %}>
+{% for slug, labels in nav_items %}
+  {% set full_doc = prefix ~ slug %}
+  {% set is_current = pagename == full_doc or (slug == 'tutorials/quickstart' and pagename == home_doc) %}
+  <li class="toctree-l1{% if is_current %} current{% endif %}">
+    <a class="reference internal{% if is_current %} current{% endif %}"
+       href="{% if is_current %}#{% else %}{{ pathto(full_doc) }}{% endif %}">{{ labels[lang] }}</a>
+  </li>
+{% endfor %}
+</ul>

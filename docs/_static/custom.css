@@ -1,0 +1,390 @@
+/* ============================================
+   MELON Docs — Clean minimal theme
+   ============================================ */
+
+/* Hide the top navbar */
+.bd-header {
+    display: none !important;
+}
+
+/* Remove top padding since navbar is gone */
+.bd-page-width {
+    margin-top: 0 !important;
+}
+.bd-container {
+    padding-top: 0 !important;
+}
+
+/* ---- Left sidebar ---- */
+.bd-sidebar-primary {
+    padding-top: 1rem !important;
+    border-right: 1px solid #e5e7eb;
+    transition: width 0.3s ease, min-width 0.3s ease, padding 0.3s ease, opacity 0.2s ease;
+    overflow: hidden;
+    width: 280px !important;
+    min-width: 280px !important;
+    flex: 0 0 280px !important;
+}
+
+/* Sidebar title styling */
+.bd-sidebar-primary .sidebar-primary-item h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    padding: 0.75rem 1rem 0.5rem;
+    margin: 0;
+}
+
+/* MELON wordmark logo at the top of the sidebar */
+.melon-sidebar-logo {
+    padding: 0.75rem 0.5rem 1.5rem 0.5rem;
+    margin: 0 0 1rem 0;
+}
+.melon-sidebar-logo a {
+    display: block;
+    line-height: 0;
+}
+.melon-sidebar-logo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Nav links */
+.bd-sidebar-primary ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+.bd-sidebar-primary li {
+    list-style: none !important;
+}
+.bd-sidebar-primary li::marker {
+    content: none !important;
+}
+
+.bd-sidebar-primary .toctree-l1 > a,
+.bd-sidebar-primary .toctree-l2 > a {
+    display: block;
+    padding: 0.55rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #374151;
+    border-radius: 4px;
+    text-decoration: none !important;
+    transition: background 0.15s, color 0.15s;
+}
+
+.bd-sidebar-primary .toctree-l1 > a:hover,
+.bd-sidebar-primary .toctree-l2 > a:hover {
+    background: #f3f4f6;
+    color: #111827;
+    text-decoration: none !important;
+}
+
+.bd-sidebar-primary .current > a {
+    color: #2563eb !important;
+    font-weight: 600;
+    background: #eff6ff;
+    border-radius: 4px;
+}
+
+/* ---- Right sidebar (On this page) ---- */
+.bd-sidebar-secondary {
+    padding-top: 1rem !important;
+}
+
+/* ---- Sidebar toggle ---- */
+#sidebar-toggle-btn {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    background: transparent;
+    border: none;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+#sidebar-toggle-btn:hover {
+    background: #f3f4f6;
+}
+
+/* Three-line hamburger icon via spans */
+#sidebar-toggle-btn span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: #9ca3af;
+    border-radius: 1px;
+    transition: background 0.15s;
+}
+
+#sidebar-toggle-btn:hover span {
+    background: #374151;
+}
+
+/* ---- Hidden state ---- */
+.sidebar-collapsed .bd-sidebar-primary {
+    width: 0 !important;
+    min-width: 0 !important;
+    flex: 0 0 0px !important;
+    padding: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    border-right: none;
+}
+
+/* ---- Content typography ---- */
+.bd-article-container {
+    max-width: 52rem;
+}
+
+.bd-content h1 {
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.bd-content h2 {
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* Code blocks */
+.bd-content .highlight {
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.bd-content .highlight pre {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Tables */
+.bd-content table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.bd-content table th {
+    background: #f9fafb;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.bd-content table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* Admonitions (notes, warnings) */
+.bd-content .admonition {
+    border-radius: 8px;
+    border-left: 4px solid;
+    padding: 0.75rem 1rem;
+    margin: 1.5rem 0;
+}
+
+/* Back to top button — hide it */
+.bd-footer-content,
+#pst-back-to-top {
+    display: none !important;
+}
+
+/* ============================================
+   Theme toggle buttons (top-right)
+   ============================================ */
+#theme-toggle-btn,
+#lang-toggle-btn {
+    position: fixed;
+    top: 14px;
+    z-index: 1100;
+}
+#theme-toggle-btn { right: 14px; }
+#lang-toggle-btn  { right: 54px; }
+#theme-toggle-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    color: #374151;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+#theme-toggle-btn:hover {
+    background: #f3f4f6;
+}
+
+/* Language toggle — same look as theme button */
+#lang-toggle-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+#lang-toggle-btn:hover {
+    background: #f3f4f6;
+}
+html[data-theme="dark"] #lang-toggle-btn {
+    color: #e5e7eb;
+}
+html[data-theme="dark"] #lang-toggle-btn:hover {
+    background: #1c2129;
+}
+
+
+/* Light/dark logo switching (specificity must beat .melon-sidebar-logo img) */
+.melon-sidebar-logo img.melon-logo-dark  { display: none !important; }
+.melon-sidebar-logo img.melon-logo-light { display: block !important; }
+html[data-theme="dark"] .melon-sidebar-logo img.melon-logo-light { display: none !important; }
+html[data-theme="dark"] .melon-sidebar-logo img.melon-logo-dark  { display: block !important; }
+
+/* ============================================
+   Dark mode overrides
+   ============================================ */
+html[data-theme="dark"] body,
+html[data-theme="dark"] .bd-page-width,
+html[data-theme="dark"] .bd-container,
+html[data-theme="dark"] .bd-main {
+    background: #0f1115 !important;
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .bd-sidebar-primary {
+    background: #11141a !important;
+    border-right: 1px solid #1f242c;
+}
+
+html[data-theme="dark"] .bd-sidebar-primary .toctree-l1 > a,
+html[data-theme="dark"] .bd-sidebar-primary .toctree-l2 > a {
+    color: #d1d5db;
+}
+html[data-theme="dark"] .bd-sidebar-primary .toctree-l1 > a:hover,
+html[data-theme="dark"] .bd-sidebar-primary .toctree-l2 > a:hover {
+    background: #1c2129;
+    color: #ffffff;
+}
+html[data-theme="dark"] .bd-sidebar-primary .current > a {
+    color: #60a5fa !important;
+    background: #18222f;
+}
+
+html[data-theme="dark"] .bd-sidebar-secondary {
+    background: #0f1115 !important;
+    color: #d1d5db;
+}
+html[data-theme="dark"] .bd-sidebar-secondary a {
+    color: #9ca3af;
+}
+html[data-theme="dark"] .bd-sidebar-secondary a:hover {
+    color: #f3f4f6;
+}
+
+html[data-theme="dark"] .bd-content,
+html[data-theme="dark"] .bd-content p,
+html[data-theme="dark"] .bd-content li {
+    color: #e5e7eb;
+}
+html[data-theme="dark"] .bd-content h1,
+html[data-theme="dark"] .bd-content h2,
+html[data-theme="dark"] .bd-content h3,
+html[data-theme="dark"] .bd-content h4 {
+    color: #f9fafb;
+    border-color: #1f242c !important;
+}
+html[data-theme="dark"] .bd-content a {
+    color: #60a5fa;
+}
+html[data-theme="dark"] .bd-content a:hover {
+    color: #93c5fd;
+}
+
+html[data-theme="dark"] .bd-content code,
+html[data-theme="dark"] .bd-content .docutils.literal {
+    background: #1a1f27;
+    color: #f3f4f6;
+    border: 1px solid #262c36;
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+}
+
+html[data-theme="dark"] .bd-content .highlight {
+    background: #0b0d12 !important;
+    border: 1px solid #1f242c;
+}
+html[data-theme="dark"] .bd-content .highlight pre {
+    background: #0b0d12 !important;
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .bd-content table th {
+    background: #161a21;
+    color: #f3f4f6;
+    border-bottom-color: #262c36;
+}
+html[data-theme="dark"] .bd-content table td {
+    border-bottom-color: #1a1f27;
+}
+
+html[data-theme="dark"] .bd-content .admonition {
+    background: #141821;
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] #sidebar-toggle-btn:hover {
+    background: #1c2129;
+}
+html[data-theme="dark"] #sidebar-toggle-btn span {
+    background: #6b7280;
+}
+html[data-theme="dark"] #sidebar-toggle-btn:hover span {
+    background: #e5e7eb;
+}
+html[data-theme="dark"] #theme-toggle-btn {
+    color: #e5e7eb;
+}
+html[data-theme="dark"] #theme-toggle-btn:hover {
+    background: #1c2129;
+}
