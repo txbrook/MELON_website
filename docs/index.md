@@ -2,12 +2,12 @@
 :maxdepth: 2
 :hidden:
 
-tutorials/quickstart
-tutorials/example_mouse_e15
-tutorials/data_preparation
-tutorials/training
-tutorials/advanced
+quickstart
+example_mouse_e15
+data_preparation
+training
+advanced
 ```
 
-```{include} tutorials/quickstart.md
+```{include} quickstart.md
 ```

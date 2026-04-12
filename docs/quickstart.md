@@ -53,5 +53,5 @@ melon-cluster --help
 
 ## Next Steps
 
-Head to the {doc}`Example: Mouse E15.5 Brain (RNA + ATAC) </tutorials/example_mouse_e15>`
+Head to the {doc}`Example: Mouse E15.5 Brain (RNA + ATAC) </example_mouse_e15>`
 for a full walkthrough with real data.

@@ -54,4 +54,4 @@ melon-cluster --help
 ## 次のステップ
 
 実データを使った完全なウォークスルーは
-{doc}`例：マウス E15.5 脳 (RNA + ATAC) </tutorials/example_mouse_e15>` をご覧ください。
+{doc}`例：マウス E15.5 脳 (RNA + ATAC) </example_mouse_e15>` をご覧ください。

@@ -53,5 +53,5 @@ melon-cluster --help
 
 ## 下一步
 
-接下来请阅读 {doc}`示例：小鼠 E15.5 大脑 (RNA + ATAC) </tutorials/example_mouse_e15>`，
+接下来请阅读 {doc}`示例：小鼠 E15.5 大脑 (RNA + ATAC) </example_mouse_e15>`，
 那是一个基于真实数据的完整流程。
