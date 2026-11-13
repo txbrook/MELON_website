@@ -31,5 +31,4 @@ jupyter lab Reproduce
 - {doc}`Five-modality mouse brain <mouse_brain>`
 - {doc}`Human lymph node <human_lymph_node>`
 - {doc}`Mouse E13 embryo <mouse_e13_embryo>`
-- {doc}`Robustness <robustness>`
 - {doc}`Controlled simulation <controlled_simulation>`

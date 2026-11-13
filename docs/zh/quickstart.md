@@ -31,5 +31,4 @@ jupyter lab Reproduce
 - {doc}`五模态小鼠大脑 <mouse_brain>`
 - {doc}`人淋巴结 <human_lymph_node>`
 - {doc}`小鼠 E13 胚胎 <mouse_e13_embryo>`
-- {doc}`稳健性分析 <robustness>`
 - {doc}`受控模拟 <controlled_simulation>`

@@ -12,7 +12,6 @@ NOTEBOOKS = [
     ("mouse_brain", "mouse_brain", ("Five-modality mouse brain", "五模态小鼠大脑", "5 モダリティのマウス脳")),
     ("human_lymph_node", "human_lymph_node", ("Human lymph node", "人淋巴结", "ヒトリンパ節")),
     ("mouse_e13_embryo", "mouse_e13_embryo", ("Mouse E13 embryo", "小鼠 E13 胚胎", "マウス E13 胚")),
-    ("robustness", "robustness", ("Robustness", "稳健性分析", "頑健性解析")),
     ("controlled_simulation", "controlled_simulation", ("Controlled simulation", "受控模拟", "制御シミュレーション")),
 ]
 
@@ -45,10 +44,6 @@ HEADINGS = {
     "Train MELON for each seed": ("MELON training", "MELON 训练", "MELON の学習"),
     "Five-fold target prediction": ("Five-fold target prediction", "五折交叉验证", "5 分割交差検証"),
     "Prediction performance": ("Prediction performance", "预测表现", "予測性能"),
-    "Preprocessed RNA and ATAC": ("Preprocessed RNA and ATAC", "预处理后的 RNA 和 ATAC", "前処理済み RNA と ATAC"),
-    "Train the parameter sweep": ("Parameter sweep", "参数扫描", "パラメータ探索"),
-    "Evaluate clustering": ("Clustering evaluation", "聚类评估", "クラスタリング評価"),
-    "Sensitivity curves": ("Sensitivity curves", "敏感性曲线", "感度曲線"),
 }
 
 def as_text(value):
@@ -91,10 +86,6 @@ def render(root, docs, ref):
             folder = generated / language
             folder.mkdir(exist_ok=True)
             sections = [f"# {titles[language_index]}\n"]
-            if name == "robustness":
-                label = ["Install R and the spARI dependency for this notebook.", "此 notebook 需要 R 和 spARI。", "この notebook には R と spARI が必要です。"][language_index]
-                sections += [label, fenced('install.packages("remotes")\nremotes::install_github("yinqiaoyan/spARI@fb739c8674abe22a1b1051760c1212305b2f3bba")', "r"),
-                             fenced('python -m pip install "rpy2>=3.5,<3.6"', "bash")]
             for i, cell in enumerate(notebook["cells"]):
                 source = as_text(cell.get("source", ""))
                 if cell["cell_type"] == "markdown":

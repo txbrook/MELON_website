@@ -31,5 +31,4 @@ jupyter lab Reproduce
 - {doc}`5 モダリティのマウス脳 <mouse_brain>`
 - {doc}`ヒトリンパ節 <human_lymph_node>`
 - {doc}`マウス E13 胚 <mouse_e13_embryo>`
-- {doc}`頑健性解析 <robustness>`
 - {doc}`制御シミュレーション <controlled_simulation>`
