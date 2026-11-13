@@ -73,7 +73,6 @@ def render(root, docs, ref):
         raw = path.read_bytes()
         notebook = json.loads(raw)
         (downloads / f"{name}.ipynb").write_bytes(raw)
-        source_link = f"https://github.com/txbrook/MELON/blob/{ref}/Reproduce/{name}/analysis.ipynb"
         output_images = {}
         for i, cell in enumerate(notebook["cells"]):
             for j, output in enumerate(cell.get("outputs", [])):
@@ -91,9 +90,7 @@ def render(root, docs, ref):
         for language, language_index in [("en", 0), ("zh", 1), ("ja", 2)]:
             folder = generated / language
             folder.mkdir(exist_ok=True)
-            view = ["View notebook on GitHub", "在 GitHub 查看 notebook", "GitHub で notebook を見る"][language_index]
-            download = ["Download notebook", "下载 notebook", "notebook をダウンロード"][language_index]
-            sections = [f"# {titles[language_index]}\n", f"[{view}]({source_link}) · {{download}}`{download} </_notebooks/{name}.ipynb>`\n"]
+            sections = [f"# {titles[language_index]}\n"]
             if name == "robustness":
                 label = ["Install R and the spARI dependency for this notebook.", "此 notebook 需要 R 和 spARI。", "この notebook には R と spARI が必要です。"][language_index]
                 sections += [label, fenced('install.packages("remotes")\nremotes::install_github("yinqiaoyan/spARI@fb739c8674abe22a1b1051760c1212305b2f3bba")', "r"),
