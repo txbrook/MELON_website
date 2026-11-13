@@ -393,7 +393,7 @@ html[data-theme="dark"] #theme-toggle-btn:hover {
 /* Notebook figures retain their original colors in both themes. */
 .bd-content img.notebook-output {
     display: block;
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     background: white;
     border-radius: 6px;
@@ -407,4 +407,5 @@ html[data-theme="dark"] #theme-toggle-btn:hover {
 @media (max-width: 767px) {
     .bd-article { padding-top: 2.5rem; }
     .bd-content .highlight pre { font-size: .78rem; }
+    .bd-content img.notebook-output { max-width: 100%; }
 }
