@@ -17,6 +17,7 @@ NOTEBOOKS = [
 
 HEADINGS = {
     "Imports and data directory": ("Setup", "环境与数据路径", "環境とデータパス"),
+    "Input data": ("Input data", "输入数据", "入力データ"),
     "Preprocessed inputs": ("Preprocessed inputs", "预处理输入", "前処理済み入力"),
     "Multimodal inputs": ("Multimodal inputs", "多模态输入", "マルチモーダル入力"),
     "Parameters": ("Parameters", "参数", "パラメータ"),

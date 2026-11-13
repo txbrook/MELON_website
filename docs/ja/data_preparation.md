@@ -1,6 +1,6 @@
 # 入力データ
 
-`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。Notebook は前処理済みの入力から始まります。
+`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。
 
 ```text
 MELON/
@@ -8,15 +8,16 @@ MELON/
 └── Published_Data_non_NASH/
 ```
 
-`features.npz` は一意の文字列 `barcodes`、`N × 2` の `coords`、各モダリティの `N × features` 配列を含みます。すべての配列でスポットの順序を一致させます。
+各 notebook はモダリティ別のファイルを直接読み込み、バーコードでスポットを揃えます。
 
-```python
-from melon_pkg.preprocessing import load_features
+- マウス E15.5 脳：`mRNA_data.h5`、`ATAC_data.h5`、`coords.csv`。RNA の正規化と ATAC の TF-IDF/LSI を notebook 内で行います。
+- ヒトリンパ節：`adata_RNA.h5ad` と `adata_ADT.h5ad`。両モダリティを notebook 内で正規化します。
+- マウス E13 胚：`adata_RNA.h5ad` と `adata_ATAC.h5ad`。両モダリティを notebook 内で正規化します。
+- ヒト扁桃：前処理済みの `adata_RNA.h5ad`、`adata_protein.h5ad`、`adata_image.h5ad`。
+- 5 モダリティのマウス脳：前処理済みの `adata_RNA.h5ad`、`adata_Protein.h5ad`、`adata_ATAC.h5ad`、`adata_H3K27ac.h5ad`、`adata_H3K27me3.h5ad`。各モダリティはスポットごとに 30 次元です。
+- 制御シミュレーション：各シードの `X_rna.npy`、`X_atac.npy`、`meta.csv`。
 
-barcodes, coords, features = load_features(
-    DATA / "02_model_inputs/MELON/features.npz", ["RNA", "ATAC"]
-)
-```
+H5AD ファイルの `.X` に特徴量行列、`.obs_names` にバーコード、`.obsm["spatial"]` に空間座標を格納します。ファイルパスと前処理パラメータは各 notebook に直接記載されています。
 
 E15 の下流解析では `02_model_inputs/downstream/rna_log1p.h5ad`、`02_model_inputs/downstream/decoder_inputs.npz`、`01_source_data/external_references/` 内の 2 つの参照ラベル CSV も使用します。
 

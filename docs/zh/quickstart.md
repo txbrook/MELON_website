@@ -10,7 +10,7 @@ source .venv/bin/activate
 python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-将 `Published_Data_non_NASH` 放在克隆的 MELON 目录中，或用 `MELON_PUBLISHED_DATA` 指定路径。Notebook 从预处理后的输入开始。
+将 `Published_Data_non_NASH` 放在克隆的 MELON 目录中，或用 `MELON_PUBLISHED_DATA` 指定路径。各 notebook 直接读取模态文件，并包含所需的归一化或 LSI 步骤。
 
 ```text
 MELON/

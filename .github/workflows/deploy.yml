@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MELON_NOTEBOOK_REF: f170f4b4842fd88f4626b16ae2b2cdf8bc1003c9
+  MELON_NOTEBOOK_REF: 65f83871ccb242498a3c0d50fb10d043c265bb52
 
 jobs:
   build:

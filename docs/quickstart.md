@@ -10,7 +10,7 @@ source .venv/bin/activate
 python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-Place `Published_Data_non_NASH` in the cloned MELON directory, or set `MELON_PUBLISHED_DATA` to its location. The notebooks start from preprocessed inputs.
+Place `Published_Data_non_NASH` in the cloned MELON directory, or set `MELON_PUBLISHED_DATA` to its location. Each notebook reads the modality files directly and includes any required normalization or LSI.
 
 ```text
 MELON/

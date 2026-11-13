@@ -10,7 +10,7 @@ source .venv/bin/activate
 python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。Notebook は前処理済みの入力から始まります。
+`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。各 notebook はモダリティ別のファイルを直接読み込み、必要な正規化や LSI の手順を含みます。
 
 ```text
 MELON/
