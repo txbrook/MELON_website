@@ -1,57 +1,35 @@
-# クイックスタート
+# インストールと使用方法
 
-MELON をあなたのマシンで動かしてみましょう。
-
-## 前提条件
-
-[uv](https://docs.astral.sh/uv/getting-started/installation/) がまだインストールされていない場合は、先にインストールしてください：
+Python 3.12 を使用します。
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+git clone https://github.com/txbrook/MELON.git
+cd MELON
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-## 環境のセットアップ
+`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。Notebook は前処理済みの入力から始まります。
 
-MELON プロジェクトのディレクトリに移動し、仮想環境を作成します：
+```text
+MELON/
+├── Reproduce/
+└── Published_Data_non_NASH/
+```
+
+Notebook を開き、パラメータ辞書を直接編集します。
 
 ```bash
-cd /path/to/MELON
-
-# 仮想環境を作成
-uv venv .venv_uv_melon --python 3.12
-source .venv_uv_melon/bin/activate
-
-# 主要な依存パッケージをインストール
-uv pip install torch pytorch-lightning numpy pandas scipy h5py scikit-learn einops scanpy
-
-# MELON を editable モードでインストール
-uv pip install -e .
+jupyter lab Reproduce
 ```
 
-## インストールの確認
+## Notebooks
 
-```bash
-melon-run --help
-melon-cluster --help
-```
-
-## 入力 / 出力
-
-**入力** —— 3 つのファイル：
-
-| 入力 | 形式 | 説明 |
-|-------|--------|-------------|
-| モダリティ 1 | `.h5ad` または `DataFrame`（spots × features） | 例：遺伝子発現 |
-| モダリティ 2 | `.h5ad` または `DataFrame`（spots × features） | 例：タンパク質 / ATAC |
-| 座標 | `.csv`、列は `x`、`y`（インデックスは barcode） | 空間位置 |
-
-**出力** —— 結合された埋め込みを格納した CSV：
-
-| 出力 | 形式 | 説明 |
-|--------|--------|-------------|
-| `latent_melon.csv` | `DataFrame`（spots × embed_dim） | 後段のクラスタリングや可視化に使う結合潜在表現 |
-
-## 次のステップ
-
-実データを使った完全なウォークスルーは
-{doc}`例：マウス E15.5 脳 (RNA + ATAC) </example_mouse_e15>` をご覧ください。
+- {doc}`マウス E15.5 脳 <example_mouse_e15>`
+- {doc}`ヒト扁桃 <human_tonsil>`
+- {doc}`5 モダリティのマウス脳 <mouse_brain>`
+- {doc}`ヒトリンパ節 <human_lymph_node>`
+- {doc}`マウス E13 胚 <mouse_e13_embryo>`
+- {doc}`頑健性解析 <robustness>`
+- {doc}`制御シミュレーション <controlled_simulation>`

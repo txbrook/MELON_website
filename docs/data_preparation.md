@@ -1,45 +1,23 @@
-# Data Preparation
+# Input data
 
-MELON expects three inputs:
+Place `Published_Data_non_NASH` in the cloned MELON directory, or set `MELON_PUBLISHED_DATA` to its location. The notebooks start from preprocessed inputs.
 
-1. **Modality 1 DataFrame** — `pandas.DataFrame` with shape `(n_spots, n_features_1)`
-2. **Modality 2 DataFrame** — `pandas.DataFrame` with shape `(n_spots, n_features_2)`
-3. **Coordinates CSV** — A CSV file with barcode index and columns `x`, `y`
+```text
+MELON/
+├── Reproduce/
+└── Published_Data_non_NASH/
+```
 
-## Loading from H5 Files
-
-MELON provides `load_custom_h5` for loading data stored in HDF5 format:
+`features.npz` contains unique string `barcodes`, an `N × 2` `coords` array, and one `N × features` array per modality. All arrays use the same spot order.
 
 ```python
-from melon_pkg import load_custom_h5
+from melon_pkg.preprocessing import load_features
 
-# Gene expression (default feature_key='gene')
-mod1_df = load_custom_h5("rna.h5", feature_key="gene")
-
-# Protein expression
-mod2_df = load_custom_h5("protein.h5", feature_key="gene")
+barcodes, coords, features = load_features(
+    DATA / "02_model_inputs/MELON/features.npz", ["RNA", "ATAC"]
+)
 ```
 
-The H5 file must contain:
-- `X` — the data matrix
-- `spot` — barcode names
-- A feature key (default `"gene"`) — feature/gene names
+The E15 downstream analysis also uses `02_model_inputs/downstream/rna_log1p.h5ad`, `02_model_inputs/downstream/decoder_inputs.npz`, and the two reference-label CSVs under `01_source_data/external_references/`.
 
-## Coordinate File Format
-
-The coordinates CSV should look like:
-
-```
-,x,y
-BARCODE_1,100.5,200.3
-BARCODE_2,101.2,199.8
-...
-```
-
-- **Index**: barcode strings (must match the DataFrame indices)
-- **Columns**: `x` and `y` (spatial coordinates)
-
-:::{note}
-Barcodes are automatically cast to strings and intersected across all three inputs.
-Only shared barcodes are used for training.
-:::
+Dataset-specific paths are shown in each notebook. Intermediate analysis files are saved before they are read by later cells.

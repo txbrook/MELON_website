@@ -1,8 +1,12 @@
-docs/_build/
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .DS_Store
 Thumbs.db
+.notebook-source/
+docs/_generated/
+docs/_notebooks/
+docs/_static/notebooks/
+docs/_build/
 _site/

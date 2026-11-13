@@ -1,57 +1,35 @@
-# 快速开始
+# 安装与使用
 
-让 MELON 在你的机器上跑起来。
-
-## 环境要求
-
-如果还没有安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，请先安装：
+使用 Python 3.12。
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+git clone https://github.com/txbrook/MELON.git
+cd MELON
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-## 配置环境
+将 `Published_Data_non_NASH` 放在克隆的 MELON 目录中，或用 `MELON_PUBLISHED_DATA` 指定路径。Notebook 从预处理后的输入开始。
 
-进入 MELON 项目目录，创建虚拟环境：
+```text
+MELON/
+├── Reproduce/
+└── Published_Data_non_NASH/
+```
+
+打开 notebook，直接修改其中的参数字典。
 
 ```bash
-cd /path/to/MELON
-
-# 创建虚拟环境
-uv venv .venv_uv_melon --python 3.12
-source .venv_uv_melon/bin/activate
-
-# 安装核心依赖
-uv pip install torch pytorch-lightning numpy pandas scipy h5py scikit-learn einops scanpy
-
-# 以可编辑模式安装 MELON
-uv pip install -e .
+jupyter lab Reproduce
 ```
 
-## 验证安装
+## Notebooks
 
-```bash
-melon-run --help
-melon-cluster --help
-```
-
-## 输入 / 输出
-
-**输入** —— 三个文件：
-
-| 输入 | 格式 | 说明 |
-|-------|--------|-------------|
-| 模态 1 | `.h5ad` 或 `DataFrame`（spots × features） | 例如：基因表达 |
-| 模态 2 | `.h5ad` 或 `DataFrame`（spots × features） | 例如：蛋白 / ATAC |
-| 坐标 | `.csv`，列为 `x`、`y`（索引为 barcode） | 空间位置 |
-
-**输出** —— 一个联合嵌入 CSV：
-
-| 输出 | 格式 | 说明 |
-|--------|--------|-------------|
-| `latent_melon.csv` | `DataFrame`（spots × embed_dim） | 用于后续聚类、可视化等的联合潜在表示 |
-
-## 下一步
-
-接下来请阅读 {doc}`示例：小鼠 E15.5 大脑 (RNA + ATAC) </example_mouse_e15>`，
-那是一个基于真实数据的完整流程。
+- {doc}`小鼠 E15.5 大脑 <example_mouse_e15>`
+- {doc}`人扁桃体 <human_tonsil>`
+- {doc}`五模态小鼠大脑 <mouse_brain>`
+- {doc}`人淋巴结 <human_lymph_node>`
+- {doc}`小鼠 E13 胚胎 <mouse_e13_embryo>`
+- {doc}`稳健性分析 <robustness>`
+- {doc}`受控模拟 <controlled_simulation>`

@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var btn = document.createElement("button");
   btn.id = "sidebar-toggle-btn";
   btn.title = "Toggle sidebar";
+  btn.setAttribute("aria-label", "Toggle sidebar");
+  btn.setAttribute("aria-controls", "pst-primary-sidebar");
   for (var i = 0; i < 3; i++) {
     btn.appendChild(document.createElement("span"));
   }
@@ -12,12 +14,34 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("sidebar-collapsed");
   }
 
+  var mobileSidebar = document.getElementById("pst-primary-sidebar-modal");
+  function updateSidebarState() {
+    var mobile = window.matchMedia("(max-width: 959.98px)").matches;
+    btn.setAttribute("aria-controls", mobile ? "pst-primary-sidebar-modal" : "pst-primary-sidebar");
+    btn.setAttribute("aria-expanded", mobile ? Boolean(mobileSidebar && mobileSidebar.open) : !document.body.classList.contains("sidebar-collapsed"));
+  }
+  updateSidebarState();
+  window.addEventListener("resize", updateSidebarState);
+  if (mobileSidebar) {
+    mobileSidebar.addEventListener("close", function () {
+      updateSidebarState();
+      btn.focus();
+    });
+  }
+
   btn.addEventListener("click", function () {
+    if (window.matchMedia("(max-width: 959.98px)").matches) {
+      var nativeToggle = document.querySelector(".primary-toggle");
+      if (nativeToggle) nativeToggle.click();
+      updateSidebarState();
+      return;
+    }
     document.body.classList.toggle("sidebar-collapsed");
     localStorage.setItem(
       "sidebar-hidden",
       document.body.classList.contains("sidebar-collapsed")
     );
+    updateSidebarState();
   });
 
   // ---- Dark / light theme toggle (top-right) ----
@@ -105,13 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
   langBtn.textContent = labels[nextLang];
   var idx = langs.indexOf(current);
   var next = langs[(idx + 1) % langs.length];
-  try {
+  function updateLanguageTarget() {
     var target = new URL(location.href);
     target.pathname = basePrefix + (next === "en" ? "" : "/" + next) + pageRelPath;
-    target.hash = location.hash;
+    var cell = location.hash.match(/^#(?:en|zh|ja)-(.+-cell-\d+)$/);
+    target.hash = cell ? "#" + next + "-" + cell[1] : "";
     langBtn.href = target.href;
-  } catch (e) {
-    langBtn.href = basePrefix + (next === "en" ? "" : "/" + next) + pageRelPath + location.hash;
   }
+  updateLanguageTarget();
+  window.addEventListener("hashchange", updateLanguageTarget);
   document.body.appendChild(langBtn);
 });

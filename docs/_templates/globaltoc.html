@@ -25,30 +25,17 @@
 </div>
 
 {% set nav_items = [
-  (
-    'quickstart',
-    {'en': 'Quick Start', 'zh': '快速开始', 'ja': 'クイックスタート'}
-  ),
-  (
-    'example_mouse_e15',
-    {
-      'en': 'Example: Mouse E15.5 Brain (RNA + ATAC)',
-      'zh': '示例：小鼠 E15.5 大脑 (RNA + ATAC)',
-      'ja': '例: マウス E15.5 脳 (RNA + ATAC)'
-    }
-  ),
-  (
-    'data_preparation',
-    {'en': 'Data Preparation', 'zh': '数据准备', 'ja': 'データ準備'}
-  ),
-  (
-    'training',
-    {'en': 'Training Configuration', 'zh': '训练配置', 'ja': '学習設定'}
-  ),
-  (
-    'advanced',
-    {'en': 'Advanced Topics', 'zh': '高级主题', 'ja': '上級トピック'}
-  )
+  ('quickstart', {'en': 'Installation and usage', 'zh': '安装与使用', 'ja': 'インストールと使用方法'}),
+  ('example_mouse_e15', {'en': 'Mouse E15.5 brain', 'zh': '小鼠 E15.5 大脑', 'ja': 'マウス E15.5 脳'}),
+  ('human_tonsil', {'en': 'Human tonsil', 'zh': '人扁桃体', 'ja': 'ヒト扁桃'}),
+  ('mouse_brain', {'en': 'Five-modality mouse brain', 'zh': '五模态小鼠大脑', 'ja': '5 モダリティのマウス脳'}),
+  ('human_lymph_node', {'en': 'Human lymph node', 'zh': '人淋巴结', 'ja': 'ヒトリンパ節'}),
+  ('mouse_e13_embryo', {'en': 'Mouse E13 embryo', 'zh': '小鼠 E13 胚胎', 'ja': 'マウス E13 胚'}),
+  ('robustness', {'en': 'Robustness', 'zh': '稳健性分析', 'ja': '頑健性解析'}),
+  ('controlled_simulation', {'en': 'Controlled simulation', 'zh': '受控模拟', 'ja': '制御シミュレーション'}),
+  ('data_preparation', {'en': 'Input data', 'zh': '输入数据', 'ja': '入力データ'}),
+  ('training', {'en': 'Parameters', 'zh': '参数', 'ja': 'パラメータ'}),
+  ('advanced', {'en': 'Downstream analysis', 'zh': '下游分析', 'ja': '下流解析'})
 ] %}
 
 <ul{% if pagename == home_doc or pagename == prefix ~ 'quickstart' %} class="current"{% endif %}>

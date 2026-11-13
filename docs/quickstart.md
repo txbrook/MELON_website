@@ -1,57 +1,35 @@
-# Quick Start
+# Installation and usage
 
-Get MELON up and running on your machine.
-
-## Prerequisites
-
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you don't have it:
+Use Python 3.12.
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+git clone https://github.com/txbrook/MELON.git
+cd MELON
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[tutorials]" jupyterlab umap-learn requests
 ```
 
-## Set Up the Environment
+Place `Published_Data_non_NASH` in the cloned MELON directory, or set `MELON_PUBLISHED_DATA` to its location. The notebooks start from preprocessed inputs.
 
-Navigate to the MELON project directory and create a virtual environment:
+```text
+MELON/
+├── Reproduce/
+└── Published_Data_non_NASH/
+```
+
+Open a notebook and edit its parameter dictionaries directly.
 
 ```bash
-cd /path/to/MELON
-
-# Create a virtual environment
-uv venv .venv_uv_melon --python 3.12
-source .venv_uv_melon/bin/activate
-
-# Install core dependencies
-uv pip install torch pytorch-lightning numpy pandas scipy h5py scikit-learn einops scanpy
-
-# Install MELON in editable mode
-uv pip install -e .
+jupyter lab Reproduce
 ```
 
-## Verify Installation
+## Notebooks
 
-```bash
-melon-run --help
-melon-cluster --help
-```
-
-## Input / Output
-
-**Input** — three files:
-
-| Input | Format | Description |
-|-------|--------|-------------|
-| Modality 1 | `.h5ad` or `DataFrame` (spots x features) | e.g. gene expression |
-| Modality 2 | `.h5ad` or `DataFrame` (spots x features) | e.g. protein / ATAC |
-| Coordinates | `.csv` with columns `x`, `y` (index = barcodes) | Spatial positions |
-
-**Output** — a joint embedding CSV:
-
-| Output | Format | Description |
-|--------|--------|-------------|
-| `latent_melon.csv` | `DataFrame` (spots x embed_dim) | Joint latent representation for downstream clustering, visualization, etc. |
-
-## Next Steps
-
-Head to the {doc}`Example: Mouse E15.5 Brain (RNA + ATAC) </example_mouse_e15>`
-for a full walkthrough with real data.
+- {doc}`Mouse E15.5 brain <example_mouse_e15>`
+- {doc}`Human tonsil <human_tonsil>`
+- {doc}`Five-modality mouse brain <mouse_brain>`
+- {doc}`Human lymph node <human_lymph_node>`
+- {doc}`Mouse E13 embryo <mouse_e13_embryo>`
+- {doc}`Robustness <robustness>`
+- {doc}`Controlled simulation <controlled_simulation>`

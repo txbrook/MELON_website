@@ -1,72 +1,13 @@
-# 上級トピック
+# 下流解析
 
-## カスタム拡張
+E15 notebook では MELON の埋め込みに続いて、次の解析を行います。
 
-自前の `SpatialOmicsAugmentations` インスタンスを渡すことができます：
+- Col1a1 と Neurod2 の発現空間図とバイオリンプロット。
+- 差次的発現解析とドメイン別のパスウェイ濃縮。
+- MELON t-SNE と空間ドメインの隣接ネットワーク。
+- ペアデコーダーと scHiCAR / Brain2023 の ROC 曲線。
+- Myl4 と Neurod2 の遺伝子–ピーク活性の空間分布。
 
-```python
-from melon_pkg import MELON, SpatialOmicsAugmentations
+デコーダーは `melon_pkg.decoder` にあります。濃縮解析セルを実行すると g:Profiler に問い合わせます。
 
-aug_strong = SpatialOmicsAugmentations(
-    augmentations=["gaussian_noise", "feature_dropout", "neighbor_mix"],
-    p=0.9,
-    random_choice=False,
-)
-
-aug_weak = SpatialOmicsAugmentations(
-    augmentations=["gaussian_noise"],
-    p=0.5,
-)
-
-model, *_ = MELON(
-    mod1_df, mod2_df, coords_path,
-    augmentA=aug_strong,
-    augmentB=aug_weak,
-)
-```
-
-## 融合モード
-
-MELON は `MMFusion` エンコーダで 2 種類の融合方式をサポートしています：
-
-### 連結（デフォルト）
-
-すべてのモダリティのトークンを系列方向に連結し、self-attention 層で処理します。
-
-```python
-model, *_ = MELON(..., fusion="concat", spot_tokenization=True)
-```
-
-### クロスアテンション
-
-各モダリティが cross-attention ブロックを通じて他方のモダリティを注視し、
-出力を連結したうえで平均プーリングします。
-
-```python
-model, *_ = MELON(..., fusion="x-attn")
-```
-
-:::{warning}
-クロスアテンションは空間アテンションや spot tokenization をサポートしません。
-:::
-
-## モデルアーキテクチャ概要
-
-```
-入力: mod1_df (N, G), mod2_df (N, P), coords (N, 2)
-  |
-  v
-エンコーダ: MLP (G -> E), MLP (P -> E)
-  |
-  v
-SpotTokenAdapter: 各モダリティで (N, E) -> (1, N, E)
-  |
-  v
-MMFusion / FusionTransformer: 連結 + self-attention
-  |  (オプション: coords から得る NeighborhoodGAT のアテンションバイアス)
-  v
-射影 MLP: E -> 256 -> E
-  |
-  v
-MELONLoss: view・モダリティ間の InfoNCE
-```
+{doc}`E15 notebook を開く <example_mouse_e15>`

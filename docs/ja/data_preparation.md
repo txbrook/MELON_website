@@ -1,45 +1,23 @@
-# データ準備
+# 入力データ
 
-MELON は次の 3 種類の入力を必要とします：
+`Published_Data_non_NASH` をクローンした MELON ディレクトリに配置するか、`MELON_PUBLISHED_DATA` でパスを指定します。Notebook は前処理済みの入力から始まります。
 
-1. **モダリティ 1 の DataFrame** —— 形状 `(n_spots, n_features_1)` の `pandas.DataFrame`
-2. **モダリティ 2 の DataFrame** —— 形状 `(n_spots, n_features_2)` の `pandas.DataFrame`
-3. **座標 CSV** —— インデックスが barcode、列が `x`、`y` の CSV ファイル
+```text
+MELON/
+├── Reproduce/
+└── Published_Data_non_NASH/
+```
 
-## H5 ファイルから読み込む
-
-MELON は HDF5 形式で保存されたデータを読み込むための `load_custom_h5` を提供しています：
+`features.npz` は一意の文字列 `barcodes`、`N × 2` の `coords`、各モダリティの `N × features` 配列を含みます。すべての配列でスポットの順序を一致させます。
 
 ```python
-from melon_pkg import load_custom_h5
+from melon_pkg.preprocessing import load_features
 
-# 遺伝子発現 (デフォルト feature_key='gene')
-mod1_df = load_custom_h5("rna.h5", feature_key="gene")
-
-# タンパク質発現
-mod2_df = load_custom_h5("protein.h5", feature_key="gene")
+barcodes, coords, features = load_features(
+    DATA / "02_model_inputs/MELON/features.npz", ["RNA", "ATAC"]
+)
 ```
 
-H5 ファイルは次を含んでいる必要があります：
-- `X` —— データ行列
-- `spot` —— barcode 名
-- feature key（デフォルトは `"gene"`） —— 特徴量 / 遺伝子名
+E15 の下流解析では `02_model_inputs/downstream/rna_log1p.h5ad`、`02_model_inputs/downstream/decoder_inputs.npz`、`01_source_data/external_references/` 内の 2 つの参照ラベル CSV も使用します。
 
-## 座標ファイルの形式
-
-座標 CSV は次のようになっている必要があります：
-
-```
-,x,y
-BARCODE_1,100.5,200.3
-BARCODE_2,101.2,199.8
-...
-```
-
-- **インデックス**：barcode 文字列（DataFrame のインデックスと一致する必要があります）
-- **列**：`x` と `y`（空間座標）
-
-:::{note}
-Barcode は自動的に文字列にキャストされ、3 つの入力すべてで共通のものに絞られます。
-学習に使われるのは共有されている barcode のみです。
-:::
+データセットごとのパスは各 notebook に記載されています。中間結果は保存してから後続のセルで読み込みます。
